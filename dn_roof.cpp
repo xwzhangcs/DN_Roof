@@ -5,9 +5,10 @@
 
 int main(int argc, const char* argv[]) {
 	if (argc != 3) {
-		std::cerr << "usage: app <path-to-metadata> <path-to-model-config-JSON-file>\n";
+		std::cerr << "usage: app <path-to-image file> <path-to-model-config-JSON-file>\n";
 		return -1;
 	}
+	feedDnn(argv[1], argv[2], true);
 	return 0;
 }
 
