@@ -5,7 +5,7 @@ set(CMAKE_BUILD_TYPE Release)
 find_package(Torch REQUIRED)
 find_package(OpenCV REQUIRED)
 include_directories( ${OpenCV_INCLUDE_DIRS} )
-include_directories("D:\\DN_Roof\\include\\")
+include_directories("D:\\research\\DN_Roof\\include\\")
 
 add_executable(dn_roof Utils.h Utils.cpp dn_roof.h dn_roof.cpp)
 target_link_libraries(dn_roof "${TORCH_LIBRARIES}")

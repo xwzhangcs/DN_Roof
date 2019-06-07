@@ -74,10 +74,10 @@ std::vector<double> feedDnn(std::string img_filename, std::string modeljson, boo
 	return confidence_values;
 }
 
-std::vector<string> get_all_files_names_within_folder(std::string folder)
+std::vector<std::string> get_all_files_names_within_folder(std::string folder)
 {
-	std::vector<string> names;
-	string search_path = folder + "/*.*";
+	std::vector<std::string> names;
+	std::string search_path = folder + "/*.*";
 	WIN32_FIND_DATA fd;
 	HANDLE hFind = ::FindFirstFile(search_path.c_str(), &fd);
 	if (hFind != INVALID_HANDLE_VALUE) {
@@ -87,7 +87,7 @@ std::vector<string> get_all_files_names_within_folder(std::string folder)
 			/*if (!(fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)) {
 				names.push_back(fd.cFileName);
 			}*/
-			if (string(fd.cFileName).compare(".") != 0 && string(fd.cFileName).compare("..") != 0)
+			if (std::string(fd.cFileName).compare(".") != 0 && std::string(fd.cFileName).compare("..") != 0)
 				names.push_back(fd.cFileName);
 		} while (::FindNextFile(hFind, &fd));
 		::FindClose(hFind);
