@@ -16,15 +16,5 @@ namespace util {
 	std::vector<double> read1DArray(const rapidjson::Value& node, const char* key);
 	bool readBoolValue(const rapidjson::Value& node, const char* key, bool default_value);
 	std::string readStringValue(const rapidjson::Value& node, const char* key);
-	//grammars
-	std::vector<double> grammar1(std::string modeljson, std::vector<double> paras, bool bDebug);
-	std::vector<double> grammar2(std::string modeljson, std::vector<double> paras, bool bDebug);
-	std::vector<double> grammar3(std::string modeljson, std::vector<double> paras, bool bDebug);
-	std::vector<double> grammar4(std::string modeljson, std::vector<double> paras, bool bDebug);
-	std::vector<double> grammar5(std::string modeljson, std::vector<double> paras, bool bDebug);
-	std::vector<double> grammar6(std::string modeljson, std::vector<double> paras, bool bDebug);
-	//synthesis
-	cv::Mat generateFacadeSynImage(int width, int height, int imageRows, int imageCols, int imageGroups, double imageRelativeWidth, double imageRelativeHeight);
-	cv::Mat generateFacadeSynImage(int width, int height, int imageRows, int imageCols, int imageGroups, int imageDoors, double imageRelativeWidth, double imageRelativeHeight, double imageRelativeDWidth, double imageRelativeDHeight);
-
+	bool AddGaussianNoise_Opencv(const cv::Mat mSrc, cv::Mat &mDst, double Mean, double StdDev);
 }
