@@ -13,6 +13,7 @@ int main(int argc, const char* argv[]) {
 }
 
 std::vector<double> feedDnn(std::string img_filename, std::string modeljson, bool bDebug) {
+	std::cout << "img_filename is " << img_filename << std::endl;
 	FILE* fp = fopen(modeljson.c_str(), "rb"); // non-Windows use "r"
 	char readBuffer[10240];
 	rapidjson::FileReadStream isModel(fp, readBuffer, sizeof(readBuffer));
@@ -29,7 +30,12 @@ std::vector<double> feedDnn(std::string img_filename, std::string modeljson, boo
 	if (bDebug) {
 		std::cout << "classifier_name is " << classifier_name << std::endl;
 	}
-	cv::Mat dnn_img = cv::imread(img_filename, CV_LOAD_IMAGE_ANYCOLOR);
+	cv::Mat dnn_img = cv::imread(img_filename, CV_LOAD_IMAGE_UNCHANGED);
+	std::cout << "dnn_img.channels() is " << dnn_img.channels() << std::endl;
+	if(dnn_img.channels() == 1)
+		cv::cvtColor(dnn_img, dnn_img, CV_GRAY2BGR);
+	if (dnn_img.channels() == 4)
+		cv::cvtColor(dnn_img, dnn_img, CV_RGBA2BGR);
 	cv::Mat dnn_img_rgb;
 	cv::cvtColor(dnn_img, dnn_img_rgb, CV_BGR2RGB);
 	cv::Mat img_float;
@@ -68,7 +74,7 @@ std::vector<double> feedDnn(std::string img_filename, std::string modeljson, boo
 			}
 		}
 		best_class = best_class + 1;
-		std::cout << "DNN class is " << best_class << std::endl;
+		std::cout << "Roof class is " << best_class << std::endl;
 	}
 	
 	return confidence_values;
