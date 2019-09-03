@@ -1,3 +1,6 @@
 data/
 include/
 build/
+roof_model_classifier_old.pt
+roof_model_classifier_v1.pt
+roof_model_classifier_v2.pt

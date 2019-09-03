@@ -2,7 +2,7 @@
 	"grammars":{
 		"classifier":{
 			"model":"../roof_model_classifier.pt",
-			"number_paras":8
+			"number_paras":6
 		}
 	},
 	"debug":true,

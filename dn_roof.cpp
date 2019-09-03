@@ -8,7 +8,12 @@ int main(int argc, const char* argv[]) {
 		std::cerr << "usage: app <path-to-image file> <path-to-model-config-JSON-file>\n";
 		return -1;
 	}
-	cv::Mat src = cv::imread(argv[1], CV_LOAD_IMAGE_ANYCOLOR);
+	float x = 55.642109, y = -43.071903;
+	float x1 = 48.788048, y1 = -55.565273;
+	std::cout << "x2 = " << 2 * x - x1 << std::endl;
+	std::cout << "y2 = " << 2 * y - y1 << std::endl;
+	return 0;
+	/*cv::Mat src = cv::imread(argv[1], CV_LOAD_IMAGE_ANYCOLOR);
 	cv::Mat dilation_dst;
 	int dilation_type = cv::MORPH_RECT;
 	int dilation_size = 2;
@@ -16,8 +21,8 @@ int main(int argc, const char* argv[]) {
 		cv::Size(2 * dilation_size + 1, 2 * dilation_size + 1), cv::Point(dilation_size, dilation_size));
 	/// Apply the dilation operation
 	dilate(src, dilation_dst, element);
-	cv::imwrite("../data/dilate.png", dilation_dst);
-	//feedDnn(argv[1], argv[2], true);
+	cv::imwrite("../data/dilate.png", dilation_dst);*/
+	feedDnn(argv[1], argv[2], true);
 	return 0;
 }
 
@@ -39,20 +44,17 @@ std::vector<double> feedDnn(std::string img_filename, std::string modeljson, boo
 	if (bDebug) {
 		std::cout << "classifier_name is " << classifier_name << std::endl;
 	}
-<<<<<<< HEAD
 	cv::Mat dnn_img = cv::imread(img_filename, CV_LOAD_IMAGE_UNCHANGED);
 	std::cout << "dnn_img.channels() is " << dnn_img.channels() << std::endl;
 	if(dnn_img.channels() == 1)
 		cv::cvtColor(dnn_img, dnn_img, CV_GRAY2BGR);
 	if (dnn_img.channels() == 4)
 		cv::cvtColor(dnn_img, dnn_img, CV_RGBA2BGR);
-=======
-	cv::Mat dnn_img = cv::imread(img_filename, CV_LOAD_IMAGE_ANYCOLOR);
+	/*cv::Mat dnn_img = cv::imread(img_filename, CV_LOAD_IMAGE_ANYCOLOR);
 	cv::Mat dnn_dst;
-	cv::GaussianBlur(dnn_img, dnn_dst, cv::Size(5, 5), 0, 0);
->>>>>>> af1c72df7aa1c0a921463b3698c2710e9456f223
+	cv::GaussianBlur(dnn_img, dnn_dst, cv::Size(5, 5), 0, 0);*/
 	cv::Mat dnn_img_rgb;
-	cv::cvtColor(dnn_dst, dnn_img_rgb, CV_BGR2RGB);
+	cv::cvtColor(dnn_img, dnn_img_rgb, CV_BGR2RGB);
 	cv::Mat img_float;
 	dnn_img_rgb.convertTo(img_float, CV_32F, 1.0 / 255);
 	auto img_tensor = torch::from_blob(img_float.data, { 1, 224, 224, 3 }).to(torch::kCUDA);
